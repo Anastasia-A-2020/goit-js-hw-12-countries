@@ -10,6 +10,10 @@ let inputText = input.addEventListener('input', debounce(onSerch, 500));
 
 function onSerch(e){
     let countryName = e.target.value;
+
+    if(countryName.length === 0){
+        return
+    };
     
     fetchCountries(countryName)
         .then(renderCountryCard)
@@ -22,8 +26,8 @@ function renderCountryCard(data){
     const cardMurkUp = cardTpl(data);
     const listMurkUp = listYTpl(data);
     
-    console.log(numberOfCountries);
-
+    // console.log(numberOfCountries);
+    
     if (numberOfCountries === 1) {
         cardContainer.insertAdjacentHTML('beforeend', cardMurkUp);
     }
@@ -34,13 +38,16 @@ function renderCountryCard(data){
     
     else if (numberOfCountries > 10){
         notification();
-   }  
-    else return;
+    }  
+   
+    else return
 
 }
 
 function error(){
+    
     return warn();
+    
 };
 
 
